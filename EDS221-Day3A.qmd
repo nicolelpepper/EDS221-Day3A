@@ -246,4 +246,31 @@ for(i in seq_along(penguins)){
 
 ```
 
+## Functional Programming
+
+```{r}
+library(tidyverse)
+
+apply(X = mtcars, MARGIN = 2, FUN = mean) # applies mean function across 
+
+```
+
+```{r}
+
+# Calculate mean by group with dplyr (group by summarize)
+penguins %>%  #taking penguin data frame 
+    group_by(species) %>% # Group by species
+    summarise(across(where(is.numeric), mean, na.rm = TRUE)) #summarize allows us to apply the mean across columns that are numeric
+
+
+```
+
+## Try it with purrr
+
+```{r}
+library(purrr)
+
+map(.x = mtcars, .f = mean) #changes it to vector
+map_df(.x = mtcars, .f = mean) #keeps it as dataframe
+```
 
