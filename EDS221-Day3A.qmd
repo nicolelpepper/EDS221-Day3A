@@ -1,0 +1,249 @@
+---
+title: "EDS 221 - Day 3 Morning Session"
+author: "Nicole Pepper"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## Set up some variables
+```{r}
+pinyon_pine <- 14
+lodgepole_pine <- 46
+```
+
+## Some logical expressions
+```{r}
+pinyon_pine == 10
+pinyon_pine < lodgepole_pine
+pinyon_pine != 25
+
+```
+
+## Conditionals
+```{r}
+# If statement
+burrito <- 1
+if(burrito > 2){
+  print("I love burritos!")
+}
+
+# If-else
+pika <- 89.1
+if(pika > 60){
+  print("mega pika!")
+} else
+  print("normal pika")
+
+# If-else if-else
+marmot <- 2.8
+if (marmot > 0.5) {
+  print("a small marmot")
+} else if (marmot >= 0.5 & marmot < 3){
+  print("a medium marmot") 
+} else print("a large marmot")
+
+```
+
+```{r}
+library(stringr)
+
+my_ships <- c("Millenium Falcon", 
+              "X-wing",
+              "Tie-fighter",
+              "Death Star")
+
+str_detect(my_ships, pattern = "r")
+
+phrase <- "I hate burritos"
+
+if(str_detect(phrase, "love")) {
+  print("burrito fan!")
+}
+
+
+# Switch statement
+species <- "cat"
+
+switch(species,
+       "cat" = print("meow"),
+       "dog" = print("woof"),
+       "mouse" = print("squeak"))
+
+
+if(species == "cat") {
+    print("meow")
+} else if (species == "mouse"){
+  print("squeak")
+} else if (species == "dog"){
+  print ("woof")
+}
+  
+  
+```
+
+## For Loops
+```{r}
+dog_names <- c("Teddy", "Khora", "Banjo", "Waffle")
+
+# For loop with iterator = pupster
+
+for (pupster in dog_names){
+  print(paste("My dog's name is", pupster))
+}
+
+# For loop 
+
+```
+
+
+```{r}
+
+mass <- seq(from= 0, to = 3, by = 0.5)
+
+mass_1 <- mass[1]
+new_value <- mass_1 + 2
+print(new_value)
+
+for (i in mass){
+  new_value <- i + 2
+  print(new_value)
+}
+
+
+
+```
+
+```{r}
+#Example with an index, handy if you have a dataframe and you want to go along rows in a dataframe rather than elements in a vector
+
+mass <- (seq(from = 0, to = 3, by = 0.5))
+
+for (i in seq_along(mass)){
+    new_value <- mass[i] + 2
+   print(new_value)
+}
+```
+
+```{r}
+tree_height <- c(1,2,6, 10)
+
+# Iterate along sequence 
+for (i in 1:length(tree_height))
+for (i in seq_along(tree_height))
+  
+for(i in seq_along(tree_height)){
+ new_value <- tree_height[i] + tree_height[i + 1] 
+ print(new_value)
+}
+
+
+
+```
+
+## For loops with conditionals
+```{r}
+animal <- c("cat", "dog", "dog", "zebra","dog")
+
+for (i in seq_along(animal)){
+  if (animal[i] == "dog") {
+  print("I love dogs")
+} else
+  print ("this is not a dog")
+}
+
+```
+
+```{r}
+# Create data sets
+species <- c("dog", "elephant","goat","dog","dog", "elephant")
+age_human <- c(3, 8, 4, 6, 12, 18)
+
+
+for (i in seq_along(species)){
+  if (species[i] == "dog") {
+  animal_age <- age_human[i] * 7
+} else if (species[i] == "elephant"){
+  animal_age <- age_human[i] * 0.88
+  
+}  else if (species[i] == "goat") {
+  animal_age <- age_human[i] * 4.7 
+}
+  print(animal_age)
+}
+
+```
+
+## Storing for loop output
+```{r}
+# create an empty vector for animal ages
+rm(list =ls())
+
+
+species <- c("dog", "elephant","goat","dog","dog", "elephant")
+animal_ages <- vector(mode = "numeric", length = length(species))
+age_human <- c(3, 8, 4, 6, 12, 18)
+
+
+for (i in seq_along(species)){
+  if (species[i] == "dog") {
+  animal_age <- age_human[i] * 7
+} else if (species[i] == "elephant"){
+  animal_age <- age_human[i] * 0.88
+  
+}  else if (species[i] == "goat") {
+  animal_age <- age_human[i] * 4.7 
+}
+animal_ages[i] <- animal_age
+}
+
+animal_ages
+
+```
+
+```{r}
+tigers <- c(29, 34, 82)
+lions <- c(2, 18, 6)
+
+# Create an empty vector to store your values in 
+big_cats <- vector(mode = "numeric", length = length(tigers))
+
+
+for (i in seq_along(tigers)){
+  total_cats <- tigers[i] + lions[i]
+  big_cats[i] <- total_cats
+}
+
+```
+
+
+```{r}
+mean_mtcars <- vector(mode = "numeric", length = ncol(mtcars))
+# na.rm tells R to ignore the NAs within a column
+for(i in 1:ncol(mtcars)) {      #looks to iterate at all rows in column 1
+mean_value <- mean(mtcars[[i]], na.rm = TRUE) #if true calculate the mean, ignore na
+mean_mtcars[i] <- mean_value #running/iterating the mean value calc for all of the items in i
+}
+
+mean_mtcars
+
+```
+
+# A for loop over columns with a condition
+```{r}
+# Install penguins package
+library(palmerpenguins)
+
+#tells how to treat each different character type
+for(i in seq_along(penguins)){
+  if(is.numeric(penguins[[i]])) { #checking if values are numeric
+  penguin_median <- median(penguins[[i]], na.rm = TRUE) #if its true take the median, ignore na
+  print(penguin_median) # print median
+} else {print ("non-numeric column")} #if not then print this
+  
+}
+
+```
+
+
